@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container-sm my-4">
+    <h1 class="text-center mb-3">Submit Your Health Report</h1>
+    <form method="post" action="{% url 'submit_health' %}">
+        {% csrf_token %}
+        <div class="form-row mb-1">
+            <div class="form-group col-md-6">
+                <input type="text" class="form-control" name="username" placeholder="Username">
+            </div>
+            <div class="form-group col-md-3">
+                <input type="text" class="form-control" id="inputZip" name="age" placeholder="Age">
+            </div>
+            <div class="form-group col-md-2">
+                <select class="form-control" id="exampleFormControlSelect1">
+                    <option selected>Select Your Gender</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Others</option>
+                </select>
+            </div>
+
+        </div>
+        <div class="form-row mb-1">
+            <div class="form-group col-md-6">
+                <input type="text" class="form-control" id="inputAddress" name="address"
+                       placeholder="Do you have any symptoms? (If yes write here)">
+            </div>
+            <div class="form-group col-md-4">
+                <select class="custom-select" id="inlineFormCustomSelect">
+                    <option selected>Do you had any of the following diseases</option>
+                    <option value="1">Diabetes</option>
+                    <option value="2">Hypertension</option>
+                    <option value="3">Lung diseases</option>
+                    <option value="3">Heart diseases</option>
+                    <option value="3">None of the Above</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+
+            <div class="form-group col-md-4">
+                <label for="checkbox">Do you traveled anywhere in the last 14 days?</label>
+                <div class="form-check" id="checkbox">
+                    <input class="form-check-input" type="radio" value="option1" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                        Yes
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="option2" id="defaultCheck2" checked>
+                    <label class="form-check-label" for="defaultCheck2">
+                        No
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputAddress2">Phone Number</label>
+            <input type="text" class="form-control" id="inputAddress2" name="phone"
+                   placeholder="Enter your phone number">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+{% endblock body %}
