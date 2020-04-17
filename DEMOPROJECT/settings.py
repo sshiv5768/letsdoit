@@ -26,7 +26,7 @@ SECRET_KEY = '^8&=+ce4*v^g#q&+%ougrid$7&4y2yc2%%=a5uer7#yc6i#ez7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['letsdoit-s.herokuapp.com', '127.0.0.1:8000']
+ALLOWED_HOSTS = []
 
 
 # Application definition
