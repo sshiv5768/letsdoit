@@ -23,7 +23,7 @@ def loginuser(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect("/home/")
+            return redirect("/")
         else:
             return render(request, 'Login.html')
 
@@ -32,7 +32,7 @@ def loginuser(request):
 
 def logoutuser(request):
     logout(request)
-    return redirect("/home/")
+    return redirect("/")
 
 
 def signup(request):
