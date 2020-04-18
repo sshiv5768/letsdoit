@@ -1,1 +1,1 @@
-web: gunicorn DEMOPROJECT.wsgi:app --log-file -
+web: gunicorn DEMOPROJECT.wsgi.app:app --log-file=-
