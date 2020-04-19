@@ -34,14 +34,89 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{% url 'submit_task' %}">Submit Your Details</a>
-                    <a class="dropdown-item" href="#">Submit Your Task</a>
+                    <div class="dropdown-divider"></div>
+                    <button type="button" class="btn btn-success mx-4" data-toggle="modal"
+                            data-target="#staticModal">
+                        Submit your task
+                    </button>
+                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{% url 'submit_health' %}">Submit Your Health Report</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Ask a Doctor</a>
                 </div>
             </li>
+            <div class="modal fade" id="staticModal" data-backdrop="static" tabindex="-1" role="dialog"
+                 aria-labelledby="staticModal" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticModal">Submit your task</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Here you have to submit you task after every 3 hours!
+                            <form method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    {% csrf_token %}
+                                    <label for="exampleFormControlFile1">Upload your photos</label>
+                                    <input type="file" class="form-control-file" id="exampleFormControlFile1"
+                                           name="photo">
+                                    <button type="submit" class="btn btn-primary">Upload</button>
+                                    {% if uploaded_file_url %}
+                                    <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a>
+                                    </p>
+                                    {% endif %}
+
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                <button type="button" class="btn btn-success mx-2" data-toggle="modal" data-target="#DosModal">
+                    Do's & Don't
+                </button>
+                <!-- DosModal -->
+                <div class="modal fade" id="DosModal" tabindex="-1" role="dialog" aria-labelledby="DosModal"
+                     aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="DosModal">Do's & Don't</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                1: Stay home as much as possible
+                                </br>2: Avoid contact with others, even with your
+                                family members if they went outside.
+                                </br>3: Wash your hands properly.
+                                </br>4: Use hand sanitizer(alcohol > 60%) before
+                                you enter in your house.
+                                </br>5: Maintain social distancing
+                                </br>6: Don't walk in to clinic if you think you have COVID-19
+                                or if you have symptoms of COVID-19.
+                                </br>7: Instead of that, call your doctor otherwise
+                                call on the helpline <b>011-23978046</b> or <b>1075</b>
+                                </br>8: Take steps to promote good mental, physical, and emotional
+                                health, Eat healthy foods.
+                                </br>9: Take a break from news and social media, because sometimes
+                                it can be stressful and upsetting.
+                                </br>10: Find time to relax and spend time with your family.
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
@@ -49,17 +124,17 @@
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
         {% if user.is_authenticated %}
-            <li class="nav-item">
-                <a class="btn btn-success mx-2" href="{% url 'logout' %}" role="button">Log Out</a>
-            </li>
-            {% else %}
-            <li class="nav-item">
-                <a class="btn btn-primary mx-2" href="{% url 'login' %}" role="button">Log In</a>
-            </li>
-            <button type="button" class="btn btn-success mx-2" data-toggle="modal" data-target="#signupModal">
+        <li class="nav-item">
+            <a class="btn btn-success mx-2" href="{% url 'logout' %}" role="button">Log Out</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+            <a class="btn btn-primary mx-2" href="{% url 'login' %}" role="button">Log In</a>
+        </li>
+        <button type="button" class="btn btn-success mx-2" data-toggle="modal" data-target="#signupModal">
             Sign up
         </button>
-            {% endif %}
+        {% endif %}
         <!-- Signup Modal -->
         <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModal"
              aria-hidden="true">
