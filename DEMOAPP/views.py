@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.models import User
+from .forms import *
 from django.contrib import messages
 from .models import SubmitTask
 from django.contrib.auth import logout, authenticate, login
@@ -12,7 +13,7 @@ from django.contrib.auth.models import User
 
 def home(request):
     # if request.user.is_anonymous:
-        # return redirect("/login/")
+    # return redirect("/login/")
     return render(request, 'index.html')
 
 
@@ -71,6 +72,17 @@ def submit_task(request):
         submit.save()
         messages.success(request, 'Successfully Submitted!')
     return render(request, 'submit_task.html')
+
+
+def submit_photo(request):
+    if request.method == 'POST' and request.FILES['photo']:
+        photo = request.FILES['photo']
+        fs = FileSystemStorage()
+        filename = fs.save(photo.name, photo)
+        uploaded_file_url = fs.url(filename)
+        messages.success(request, 'Successfully Submitted!')
+        return render(request, '/', {'uploaded_file_url': uploaded_file_url})
+    return redirect('/')
 
 
 def submit_health(request):
